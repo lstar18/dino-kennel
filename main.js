@@ -124,9 +124,11 @@ const printDinos = (dinoArray) => {
         domString += `<img src="${dinoArray[i].imageUrl}" class="card-img-top dino-photo" alt="Card image cap">`
         domString += `<div class="card-body">`
         domString += ` <h5 class="card-title">${dinoArray[i].name} </h5>`
-        domString += ` <p class="card-text"> Health: ${dinoArray[i].health}</p>`
+        domString += '<div class="progress">'
+        domString += `<div class="progress-bar bg-danger" role="progressbar" style="width:${dinoArray[i].health}%" aria-valuenow="${dinoArray[i].health}" aria-valuemin="0" aria-valuemax="100"></div>`
+        domString += '</div>'
         domString += '<button class="btn btn-outline-dark feed-button"> <i class="fas fa-drumstick-bite"></i></button>'
-       domString += '<button class="btn btn-outline-dark single-dino"><i class="far fa-eye"></i></button>'
+        domString += '<button class="btn btn-outline-dark single-dino"><i class="far fa-eye"></i></button>'
         domString += '<button class="btn btn-outline-danger delete-dino"><i class="fas fa-trash-alt"></i></button>'
         domString += '</div>';
         domString += '</div>';
