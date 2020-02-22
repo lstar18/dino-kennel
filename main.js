@@ -5,7 +5,7 @@ const dinos = [{
     age: 30,
     owner: 'Zoe',
     adventures: [],
-    health: 100,
+    health: 99,
     imageUrl: 'https://images-na.ssl-images-amazon.com/images/I/61fC04pumjL._AC_SL1001_.jpg'
   },
   {
@@ -72,10 +72,11 @@ const singleDinoAddEvents = () => {
 const dinoHealth = (e) => {
     const dinoId = e.target.closest('.card').id;
     const dinoPosition = dinos.findIndex((p) => p.id === dinoId);
-    dinos[dinoPosition].health += 1;
-  printDinos(dinos);
-
-}
+    if(dinos[dinoPosition].health < 100) {
+        dinos[dinoPosition].health += 1;
+        printDinos(dinos);
+    };
+};
 //adding mouseleave to image
 const petEvents = () => {
     const dinoPetButtons = document.getElementsByClassName('dino-photo');
