@@ -83,6 +83,19 @@ const petEvents = () => {
     for (let i = 0; i < dinoPetButtons.length; i++)
         dinoPetButtons[i].addEventListener('mouseleave', dinoHealth);
 };
+const deleteDinoEvent = (e) => {
+    const dinoId = e.target.closest('.card').id;
+    const dinoPosition = dinos.findIndex((p) => p.id === dinoId);
+   dinos.splice(dinoPosition, 1);
+   printDinos(dinos);
+}
+//grabbing all delete buttons and added a click event
+const deleteEvents = () => {
+    const dinoDeleteButtons = document.getElementsByClassName('delete-dino');
+    for (let i = 0; i < dinoDeleteButtons.length; i++){
+        dinoDeleteButtons[i].addEventListener('click', deleteDinoEvent);
+    };
+};
 //printing dino cards from form input values
 const printDinos = (dinoArray) => {
     let domString = '';
@@ -94,6 +107,7 @@ const printDinos = (dinoArray) => {
         domString += ` <h5 class="card-title">${dinoArray[i].name} </h5>`
         domString += ` <p class="card-text"> Health: ${dinoArray[i].health}</p>`
         domString += '<button class="btn btn-outline-dark single-dino"><i class="far fa-eye"></i></button>'
+        domString += '<button class="btn btn-outline-danger delete-dino"><i class="fas fa-trash-alt"></i></button>'
         domString += '</div>';
         domString += '</div>';
         domString += '</div>';
@@ -101,6 +115,7 @@ const printDinos = (dinoArray) => {
     printToDom('kennel', domString)
     singleDinoAddEvents();
     petEvents();
+    deleteEvents();
 };
 //creates bew dino from form by getting the elements by their ids and creating a new object in the array
 const newDino = (e) => {
