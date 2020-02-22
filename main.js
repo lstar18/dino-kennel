@@ -15,7 +15,7 @@ const dinos = [{
     age: 10,
     owner: 'Zoe',
     adventures: [],
-    health: 100,
+    health: 1,
     imageUrl: 'https://images-na.ssl-images-amazon.com/images/I/61fC04pumjL._AC_SL1001_.jpg'
   },
   {
@@ -25,7 +25,7 @@ const dinos = [{
     age: 50,
     owner: 'Luke',
     adventures: [],
-    health: 100,
+    health: 45,
     imageUrl: 'https://images-na.ssl-images-amazon.com/images/I/61fC04pumjL._AC_SL1001_.jpg'
   }];
 const printToDom = (divId, textToPrint) => {
@@ -37,6 +37,7 @@ const closeSingleViewEvent = () => {
     printToDom('single-view', '');
     printDinos(dinos);
 }
+//printing a single card
 const viewSingleDino = (e) => {
     const dinoId = e.target.closest('.card').id;
     const selectedDino = dinos.find((x) => dinoId === x.id);
@@ -61,19 +62,33 @@ const viewSingleDino = (e) => {
     printToDom('single-view', domString);
 document.getElementById('close-single-view').addEventListener('click',closeSingleViewEvent);
 }
-
+//adding single view button
 const singleDinoAddEvents = () => {
     const dinoViewButtons = document.getElementsByClassName('single-dino');
     for (let i = 0; i < dinoViewButtons.length; i++)
         dinoViewButtons[i].addEventListener('click',viewSingleDino);
 };
+//Targeting dino in array using findIndex to increase health value by 1
+const dinoHealth = (e) => {
+    const dinoId = e.target.closest('.card').id;
+    const dinoPosition = dinos.findIndex((p) => p.id === dinoId);
+    dinos[dinoPosition].health += 1;
+  printDinos(dinos);
 
+}
+//adding mouseleave to image
+const petEvents = () => {
+    const dinoPetButtons = document.getElementsByClassName('dino-photo');
+    for (let i = 0; i < dinoPetButtons.length; i++)
+        dinoPetButtons[i].addEventListener('mouseleave', dinoHealth);
+};
+//printing dino cards from form input values
 const printDinos = (dinoArray) => {
     let domString = '';
     for (let i=0; i < dinoArray.length; i++) {
         domString += `<div class="col-4">`
         domString += `<div id="${dinoArray[i].id}" class="card">`
-        domString += `<img src="${dinoArray[i].imageUrl}" class="card-img-top" alt="Card image cap">`
+        domString += `<img src="${dinoArray[i].imageUrl}" class="card-img-top dino-photo" alt="Card image cap">`
         domString += `<div class="card-body">`
         domString += ` <h5 class="card-title">${dinoArray[i].name} </h5>`
         domString += ` <p class="card-text"> Health: ${dinoArray[i].health}</p>`
@@ -84,8 +99,9 @@ const printDinos = (dinoArray) => {
     }
     printToDom('kennel', domString)
     singleDinoAddEvents();
+    petEvents();
 };
-
+//creates bew dino from form by getting the elements by their ids and creating a new object in the array
 const newDino = (e) => {
     e.preventDefault();
     const brandNewDino = {
