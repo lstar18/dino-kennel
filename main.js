@@ -10,3 +10,11 @@ const dinos = [
       imageUrl: 'https://images-na.ssl-images-amazon.com/images/I/61fC04pumjL._AC_SL1001_.jpg'
     }
   ]
+
+  const newDino = () => {
+
+  };
+ 
+  const formCollapse = () => {
+
+  }; 
