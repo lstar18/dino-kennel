@@ -96,6 +96,25 @@ const deleteEvents = () => {
         dinoDeleteButtons[i].addEventListener('click', deleteDinoEvent);
     };
 };
+const feedMe = (e) => {
+    const dinoId = e.target.closest('.card').id;
+    const dinoPosition = dinos.findIndex((p) => p.id === dinoId);
+    if(dinos[dinoPosition].health < 90) {
+        dinos[dinoPosition].health += 10;
+        printDinos(dinos);
+}
+    if(dinos[dinoPosition].health > 89 && dinos[dinoPosition].health < 100) {
+        dinos[dinoPosition].health = 100;
+        printDinos(dinos);
+}
+printDinos(dinos);
+}
+const feedEvents = () => {
+    const dinoFeedButtons = document.getElementsByClassName('feed-button');
+    for (let i = 0; i < dinoFeedButtons.length; i++) {
+        dinoFeedButtons[i].addEventListener('click', feedMe);
+    };
+};
 //printing dino cards from form input values
 const printDinos = (dinoArray) => {
     let domString = '';
@@ -106,7 +125,8 @@ const printDinos = (dinoArray) => {
         domString += `<div class="card-body">`
         domString += ` <h5 class="card-title">${dinoArray[i].name} </h5>`
         domString += ` <p class="card-text"> Health: ${dinoArray[i].health}</p>`
-        domString += '<button class="btn btn-outline-dark single-dino"><i class="far fa-eye"></i></button>'
+        domString += '<button class="btn btn-outline-dark feed-button"> <i class="fas fa-drumstick-bite"></i></button>'
+       domString += '<button class="btn btn-outline-dark single-dino"><i class="far fa-eye"></i></button>'
         domString += '<button class="btn btn-outline-danger delete-dino"><i class="fas fa-trash-alt"></i></button>'
         domString += '</div>';
         domString += '</div>';
@@ -116,6 +136,7 @@ const printDinos = (dinoArray) => {
     singleDinoAddEvents();
     petEvents();
     deleteEvents();
+    feedEvents();
 };
 //creates bew dino from form by getting the elements by their ids and creating a new object in the array
 const newDino = (e) => {
