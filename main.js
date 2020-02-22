@@ -41,7 +41,6 @@ const closeSingleViewEvent = () => {
 const viewSingleDino = (e) => {
     const dinoId = e.target.closest('.card').id;
     const selectedDino = dinos.find((x) => dinoId === x.id);
-    console.log('selectedDino', selectedDino)
     let domString = '';
     domString += '<button class="btn btn-outline-dark single-dino" id="close-single-view"><i class="far fa-times-circle"></i></button>'
     domString += '<div class="container">';
