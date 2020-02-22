@@ -54,6 +54,9 @@ const viewSingleDino = (e) => {
         domString +=    `<p>${selectedDino.type} </p>`;
         domString +=    `<p>${selectedDino.age} </p>`;
         domString +=    `<p>${selectedDino.owner} </p>`;
+        domString += '<div class="progress">'
+        domString += `<div class="progress-bar bg-danger" role="progressbar" style="width:${selectedDino.health}%" aria-valuenow="${selectedDino.health}" aria-valuemin="0" aria-valuemax="100"></div>`
+        domString += '</div>'
         domString += '</div>';
         domString += '</div>';
         domString += '</div>';
